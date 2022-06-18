@@ -7,7 +7,8 @@ export const locService = {
     getLocs,
     getEmptyLoc,
     createLoc,
-    saveLoc
+    saveLoc,
+    removeLoc
 }
 
 const locs = [
@@ -17,6 +18,12 @@ const locs = [
 async function saveLoc(loc) {
     return storageService.post(STORAGE_KEY, loc)
 }
+
+async function removeLoc(locId) {
+    return storageService.remove(STORAGE_KEY, locId)
+}
+
+
 
 function getEmptyLoc() {
     return {

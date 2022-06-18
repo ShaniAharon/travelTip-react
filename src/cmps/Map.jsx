@@ -23,19 +23,26 @@ export const Map = () => {
       setMarkers((prevMarkers) => [...prevMarkers, loc])
     })
 
-    loadLocs()
+    const unsubscribeRemoveMark = eventBus.on('removeMark', (locId) => {
+      setMarkers((prevMarkers) => prevMarkers.filter(({_id}) => _id !== locId))
+    })
+
     setCenter({lat: 34, lng: -80})
     //componentWillUnmount
     return () => {
       unsubscribeCenter()
       unsubscribeMark()
+      unsubscribeRemoveMark()
     }
+  }, [])
+
+  useEffect(() => {
+    loadLocs()
   }, [])
 
   const loadLocs = async () => {
     const locs = await locService.getLocs()
     setMarkers(locs)
-    console.log(markers)
   }
 
   const handleClick = ({latLng}) => {
