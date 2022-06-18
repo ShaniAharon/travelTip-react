@@ -19,7 +19,7 @@ export const LocList = () => {
       <h2 className="text-center u">Your locs</h2>
       <ul className="clean-list pos-center">
         {locs.map((loc) => (
-          <li className="loc" key={loc.id}>
+          <li className="loc" key={loc._id}>
             {loc.name}
           </li>
         ))}
