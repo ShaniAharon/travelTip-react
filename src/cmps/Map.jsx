@@ -73,7 +73,6 @@ export const Map = () => {
       center={center}
       mapContainerClassName="map-container"
     >
-      {/* <Marker position={center} /> */}
       {markers.map(({name, lat, lng}, idx) => (
         <Marker key={idx} title={name} position={{lat, lng}} />
       ))}

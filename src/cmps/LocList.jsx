@@ -1,10 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {locService} from '../services/loc.service'
 import {eventBus} from '../services/eventBusService'
 
 export const LocList = () => {
   const [locs, setLocs] = useState(null)
-  // let btnStyle = useRef({display: 'none'})
 
   useEffect(() => {
     loadLocs()
@@ -29,12 +28,10 @@ export const LocList = () => {
   }
   const handleButtonLeave = (ev) => {
     ev.stopPropagation()
-    // console.log(' ev.target', ev)
   }
 
   const handleMouseOver = (ev) => {
     ev.target.children[0].style.display = 'block'
-    // btnStyle.current = {display: 'block'}
   }
 
   const handleMouseLeave = (ev) => {
