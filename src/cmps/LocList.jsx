@@ -6,7 +6,7 @@ export const LocList = () => {
 
   useEffect(() => {
     loadLocs()
-  }, [])
+  })
 
   const loadLocs = async () => {
     const locs = await locService.getLocs()

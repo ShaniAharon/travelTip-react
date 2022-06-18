@@ -25,7 +25,6 @@ export const Modal = ({pos}) => {
   if (!loc) return <div>Loading...</div>
 
   return (
-    //TODO: create a modal with form and input , when submit create a new loc
     <div className="modal pos-center pos-relative">
       <h2 className="text-center u">Modal</h2>
       <form onSubmit={onSaveLoc} className="">
