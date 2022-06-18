@@ -3,19 +3,22 @@ import {GoogleMap, Marker} from '@react-google-maps/api'
 import {Modal} from '../cmps/Modal'
 import {locService} from '../services/loc.service'
 import {eventBus} from '../services/eventBusService'
-import {geoService} from '../services/geocoding.service'
 
 export const Map = () => {
   // let center = useMemo(() => ({lat: 34, lng: -80}), [])
   const [pos, setPos] = useState(null)
   const [center, setCenter] = useState(null)
   const [markers, setMarkers] = useState([])
-  const searchInput = useRef('')
 
   useEffect(() => {
     //componentDidMount
     const unsubscribeCenter = eventBus.on('clickLoc', ({lat, lng}) => {
       setCenter({lat, lng})
+    })
+
+    const unsubscribeSearch = eventBus.on('searchLoc', (loc) => {
+      setCenter(loc)
+      setMarkers((prevMarkers) => [...prevMarkers, loc])
     })
 
     const unsubscribeUserLoc = eventBus.on('toUserLoc', () => {
@@ -43,6 +46,7 @@ export const Map = () => {
       unsubscribeMark()
       unsubscribeRemoveMark()
       unsubscribeUserLoc()
+      unsubscribeSearch()
     }
   }, [])
 
@@ -52,12 +56,8 @@ export const Map = () => {
 
   const loadLocs = async () => {
     const locs = await locService.getLocs()
-    const {results} = await geoService.getPos('Washington')
-    console.log('res', results[0].geometry.location) //results[0].geometry.location
     setMarkers(locs)
   }
-
-  const searchLoc = () => {}
 
   const handleClick = ({latLng}) => {
     const pos = {lat: latLng.lat(), lng: latLng.lng()}

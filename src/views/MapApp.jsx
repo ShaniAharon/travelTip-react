@@ -1,13 +1,31 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useLoadScript} from '@react-google-maps/api'
 import {Map} from '../cmps/Map'
 import {LocList} from '../cmps/LocList'
 import {eventBus} from '../services/eventBusService'
+import {geoService} from '../services/geocoding.service'
+import {locService} from '../services/loc.service'
 
 export const MapApp = () => {
   const {isLoaded} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   })
+
+  const [search, setSearch] = useState('')
+
+  const searchLoc = ({target}) => {
+    setSearch(target.value)
+  }
+
+  const findLoc = async () => {
+    if (!search) return
+    const {results} = await geoService.getPos(search)
+    const searchPos = results[0].geometry.location
+    const loc = {...searchPos, name: search}
+    console.log('loc seearch', loc) //results[0].geometry.location
+    await locService.saveLoc(loc)
+    eventBus.emit('searchLoc', loc)
+  }
 
   const toMyLoc = () => {
     eventBus.emit('toUserLoc', 'test')
@@ -25,6 +43,13 @@ export const MapApp = () => {
         >
           My location
         </button>
+        {/* put it in a cmp later */}
+        <div>
+          <input type="text" onChange={searchLoc} value={search} className="" />
+          <button onClick={findLoc} className="btn  btn-success btn-location">
+            find Location
+          </button>
+        </div>
       </div>
     </section>
   )
