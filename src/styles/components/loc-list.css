@@ -1,13 +1,16 @@
 .loc-list {
   border: 2px solid var(--gray-300);
   border-radius: 0.5rem;
-  width: 200px;
+  width: 400px;
   height: 200px;
   margin-left: 20px;
   transition: var(--transition);
 }
 
-.btn-delete{
+/* .btn-delete{
+  display: none;
+} */
+.btn-container{
   display: none;
 }
 

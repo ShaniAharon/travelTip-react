@@ -29,7 +29,7 @@ export const LocList = () => {
   }
   const handleButtonLeave = (ev) => {
     ev.stopPropagation()
-    ev.target.style.display = 'none'
+    // console.log(' ev.target', ev)
   }
 
   const handleMouseOver = (ev) => {
@@ -48,21 +48,31 @@ export const LocList = () => {
       <ul className="clean-list pos-center">
         {locs.map((loc) => (
           <li
-            onClick={() => handleClick(loc)}
             onMouseOver={handleMouseOver}
             onMouseLeave={handleMouseLeave}
             className="loc"
             key={loc._id}
           >
             {loc.name}
-            <button
+            <div
+              className="btn-container"
               onMouseOver={handleButtonHover}
               onMouseLeave={handleButtonLeave}
-              onClick={(ev) => removeLoc(ev, loc)}
-              className={'btn btn-danger btn-delete'}
             >
-              delete
-            </button>
+              <button
+                onClick={(ev) => removeLoc(ev, loc)}
+                onMouseLeave={handleButtonLeave}
+                className={'btn btn-danger btn-delete'}
+              >
+                delete
+              </button>
+              <button
+                onClick={() => handleClick(loc)}
+                className={'btn btn-success btn-delete'}
+              >
+                Go
+              </button>
+            </div>
           </li>
         ))}
       </ul>
