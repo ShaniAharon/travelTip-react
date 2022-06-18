@@ -25,6 +25,7 @@ export const MapApp = () => {
     console.log('loc seearch', loc) //results[0].geometry.location
     await locService.saveLoc(loc)
     eventBus.emit('searchLoc', loc)
+    setSearch('')
   }
 
   const toMyLoc = () => {
@@ -44,7 +45,7 @@ export const MapApp = () => {
           My location
         </button>
         {/* put it in a cmp later */}
-        <div>
+        <div className="search-container">
           <input type="text" onChange={searchLoc} value={search} className="" />
           <button onClick={findLoc} className="btn  btn-success btn-location">
             find Location

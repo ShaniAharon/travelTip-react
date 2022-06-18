@@ -1,4 +1,17 @@
 .map-app-container {
   display: flex;
-  
+}
+
+.search-container{
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+.search-container input {
+  padding: 8px 28px;
+  margin-right: 10px;
+}
+
+.search-container button {
+  padding: 10px 30px;
 }
