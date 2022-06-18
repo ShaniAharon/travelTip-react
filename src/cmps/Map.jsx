@@ -1,11 +1,28 @@
-import {useMemo, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import {GoogleMap, Marker} from '@react-google-maps/api'
 import {Modal} from '../cmps/Modal'
+import {eventBus} from '../services/eventBusService'
 
 export const Map = () => {
-  const center = useMemo(() => ({lat: 34, lng: -80}), [])
+  // let center = useMemo(() => ({lat: 34, lng: -80}), [])
   const [pos, setPos] = useState(null)
+  const [center, setCenter] = useState(null)
+  //TODO: Make markers service to controll the markers ,
+  // Connect between the marks and the locs, Also need to servive refresh
   const [markers, setMarkers] = useState([])
+
+  useEffect(() => {
+    //componentDidMount
+    const unsubscribeFunc = eventBus.on('clickLoc', ({lat, lng}) => {
+      setCenter({lat, lng})
+    })
+
+    setCenter({lat: 34, lng: -80})
+    //componentWillUnmount
+    return () => {
+      unsubscribeFunc()
+    }
+  }, [])
 
   const handleClick = ({latLng}) => {
     const pos = {lat: latLng.lat(), lng: latLng.lng()}
@@ -19,8 +36,7 @@ export const Map = () => {
       },
     ])
   }
-  //TODO: user click a loc open model to enter a name
-  //Add it to the saved locs , put mark on it
+
   return (
     <GoogleMap
       onClick={handleClick}

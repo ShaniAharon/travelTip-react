@@ -5,7 +5,6 @@ import {locService} from '../services/loc.service'
 export const Modal = ({pos}) => {
   const [loc, handleChange, setLoc] = useForm(null)
   const [isShow, setShow] = useState(false)
-  console.log('got pos prop', pos)
 
   useEffect(() => {
     loadLoc()
@@ -13,9 +12,7 @@ export const Modal = ({pos}) => {
 
   const loadLoc = () => {
     const loc = !pos ? locService.getEmptyLoc() : locService.createLoc(pos)
-    console.log('loc', loc)
     setLoc(loc)
-    console.log('isShow', isShow)
     setShow(true)
   }
 
