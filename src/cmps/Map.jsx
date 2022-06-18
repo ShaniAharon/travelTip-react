@@ -9,6 +9,7 @@ export const Map = () => {
   const [center, setCenter] = useState(null)
   //TODO: Make markers service to controll the markers ,
   // Connect between the marks and the locs, Also need to servive refresh
+  //TODO: remove markers from the array when needed
   const [markers, setMarkers] = useState([])
 
   useEffect(() => {

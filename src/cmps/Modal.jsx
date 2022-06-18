@@ -18,8 +18,7 @@ export const Modal = ({pos}) => {
 
   const onSaveLoc = async (ev) => {
     ev.preventDefault()
-    const savedLoc = await locService.saveLoc(loc)
-    console.log('savedLoc', savedLoc)
+    await locService.saveLoc(loc)
     setShow(false)
   }
 
