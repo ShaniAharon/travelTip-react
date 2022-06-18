@@ -4,11 +4,11 @@ import {Modal} from '../cmps/Modal'
 
 export const Map = () => {
   const center = useMemo(() => ({lat: 34, lng: -80}), [])
-  const [loc, setLoc] = useState(null)
+  const [pos, setPos] = useState(null)
 
   const handleClick = ({latLng}) => {
     const pos = {lat: latLng.lat(), lng: latLng.lng()}
-    setLoc(pos)
+    setPos(pos)
   }
   //TODO: user click a loc open model to enter a name
   //Add it to the saved locs , put mark on it
@@ -21,7 +21,7 @@ export const Map = () => {
       mapContainerClassName="map-container"
     >
       <Marker position={center} />
-      <Modal loc={loc} />
+      {pos && <Modal pos={pos} />}
     </GoogleMap>
   )
 }

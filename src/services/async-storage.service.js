@@ -5,6 +5,7 @@ export const storageService = {
     post,
     put,
     remove,
+    postMany
 }
 
 function query(entityType, delay = 300) {
@@ -28,6 +29,15 @@ function post(entityType, newEntity) {
             entities.push(newEntity)
             _save(entityType, entities)
             return newEntity
+        })
+}
+
+function postMany(entityType, newEntites) {
+    return query(entityType)
+        .then(entities => {
+            entities.push(...newEntites)
+            _save(entityType, entities)
+            return newEntites
         })
 }
 
