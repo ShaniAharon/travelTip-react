@@ -11,6 +11,8 @@ export const MapApp = () => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   })
 
+  //TODO: Create a ‘copy link’ button that saves a link to the clipboard.
+  //TODO: Use query string params
   const [search, setSearch] = useState('')
 
   const searchLoc = ({target}) => {
