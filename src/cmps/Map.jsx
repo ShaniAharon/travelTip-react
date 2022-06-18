@@ -1,6 +1,7 @@
 import {useEffect, useMemo, useState} from 'react'
 import {GoogleMap, Marker} from '@react-google-maps/api'
 import {Modal} from '../cmps/Modal'
+import {locService} from '../services/loc.service'
 import {eventBus} from '../services/eventBusService'
 
 export const Map = () => {
@@ -14,29 +15,35 @@ export const Map = () => {
 
   useEffect(() => {
     //componentDidMount
-    const unsubscribeFunc = eventBus.on('clickLoc', ({lat, lng}) => {
+    const unsubscribeCenter = eventBus.on('clickLoc', ({lat, lng}) => {
       setCenter({lat, lng})
     })
 
+    const unsubscribeMark = eventBus.on('putMark', (loc) => {
+      setMarkers((prevMarkers) => [...prevMarkers, loc])
+    })
+
+    loadLocs()
     setCenter({lat: 34, lng: -80})
     //componentWillUnmount
     return () => {
-      unsubscribeFunc()
+      unsubscribeCenter()
+      unsubscribeMark()
     }
   }, [])
+
+  const loadLocs = async () => {
+    const locs = await locService.getLocs()
+    setMarkers(locs)
+    console.log(markers)
+  }
 
   const handleClick = ({latLng}) => {
     const pos = {lat: latLng.lat(), lng: latLng.lng()}
     setPos(pos)
-    setMarkers((prevMarkers) => [
-      ...prevMarkers,
-      {
-        title: 'The marker`s title will appear as a tooltip.',
-        name: 'test',
-        position: {lat: pos.lat, lng: pos.lng},
-      },
-    ])
   }
+
+  if (!markers.length) return <div>Loading...</div>
 
   return (
     <GoogleMap
@@ -45,14 +52,9 @@ export const Map = () => {
       center={center}
       mapContainerClassName="map-container"
     >
-      <Marker position={center} />
-      {markers.map((marker, idx) => (
-        <Marker
-          key={idx}
-          title={marker.title}
-          name={marker.name}
-          position={marker.position}
-        />
+      {/* <Marker position={center} /> */}
+      {markers.map(({name, lat, lng}, idx) => (
+        <Marker key={idx} title={name} position={{lat, lng}} />
       ))}
       {pos && <Modal pos={pos} />}
     </GoogleMap>

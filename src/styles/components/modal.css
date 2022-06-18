@@ -21,6 +21,6 @@
 
 .modal:hover {
   /* border-color: var(--gray-500); */
-  color: var(--red-300);
+  color: var(--teal-600);
   transition: var(--transition);
 }

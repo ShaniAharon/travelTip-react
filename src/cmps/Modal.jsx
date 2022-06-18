@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useForm} from '../hooks/useForm'
 import {locService} from '../services/loc.service'
+import {eventBus} from '../services/eventBusService'
 
 export const Modal = ({pos}) => {
   const [loc, handleChange, setLoc] = useForm(null)
@@ -20,6 +21,7 @@ export const Modal = ({pos}) => {
     ev.preventDefault()
     await locService.saveLoc(loc)
     setShow(false)
+    eventBus.emit('putMark', loc)
   }
 
   if (!loc) return <div>Loading...</div>
@@ -28,7 +30,7 @@ export const Modal = ({pos}) => {
     <div
       className={'modal pos-center pos-relative' + (isShow ? ' show' : ' hide')}
     >
-      <h2 className="text-center u">Modal</h2>
+      <h2 className="text-center u">Name It</h2>
       <form onSubmit={onSaveLoc} className="">
         <input
           type="text"

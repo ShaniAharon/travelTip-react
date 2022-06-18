@@ -9,6 +9,7 @@ export const locService = {
     createLoc,
     saveLoc
 }
+
 const locs = [
     { _id: makeId(), name: 'Greatplace', lat: 34, lng: -80 },
 ]
