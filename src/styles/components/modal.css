@@ -9,6 +9,16 @@
   box-shadow: 8px 7px 14px 0px rgba(0,0,0,0.75);
 }
 
+.hide{
+  display: none;
+
+}
+
+.show{
+  display: block;
+
+}
+
 .modal:hover {
   /* border-color: var(--gray-500); */
   color: var(--red-300);
