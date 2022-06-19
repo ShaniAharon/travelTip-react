@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useLoadScript} from '@react-google-maps/api'
 import {Map} from '../cmps/Map'
 import {LocList} from '../cmps/LocList'
@@ -11,16 +11,24 @@ export const MapApp = () => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   })
 
+  useEffect(() => {
+    const centerPos = extractParamsData()
+    console.log('centerPos', centerPos)
+  }, [])
+
   //TODO: Create a ‘copy link’ button that saves a link to the clipboard.
   //TODO: Use query string params
 
   const copyURLToClipboard = () => {
     const {lat, lng} = locService.getCenterLoc()
-    const modfiyURL = window.location.href + `?lat=${lat}&lng=${lng}` //http://localhost:3000/?lat=3.14&lng=1.63
+    //fix a bug when we already got qs params
+    const idx = window.location.href.indexOf('?')
+    const href =
+      idx < 0 ? window.location.href : window.location.href.substring(0, idx)
+    const modfiyURL = href + `?lat=${lat}&lng=${lng}` //http://localhost:3000/?lat=3.14&lng=1.63
 
     //copy the page url to clipboard
     navigator.clipboard.writeText(modfiyURL)
-    extractParamsData()
   }
   //TODO: Get data from the qs params in the url - lat,lng,
   // Can do stuff with it like set the center of the map
