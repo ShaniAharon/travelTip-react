@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useForm} from '../hooks/useForm'
 import {locService} from '../services/loc.service'
-// import {eventBus} from '../services/eventBusService'
+import {eventBus} from '../services/eventBusService'
 import {weatherService} from '../services/weather.service'
 
 export const WeatherPreview = ({pos}) => {
@@ -11,8 +11,16 @@ export const WeatherPreview = ({pos}) => {
   useEffect(() => {
     const centerLoc = locService.getCenterLoc()
     weatherService.getWeather(centerLoc).then((res) => {
-      console.log(res)
       setWeatherData(res)
+    })
+    const unsubscribeWeather = eventBus.on('centerWeather', (pos) => {
+      weatherService.getWeather(pos).then((res) => {
+        setWeatherData(res)
+      })
+
+      return () => {
+        unsubscribeWeather()
+      }
     })
   }, [pos])
 
@@ -23,7 +31,6 @@ export const WeatherPreview = ({pos}) => {
     // const mains = Object.entries(main).map((item) => (
     //   <li key={Math.random()}>{item}</li>
     // ))
-    console.log('[temp, humidity, description]', [temp, humidity, description])
     return [
       `Temp: ${temp} `,
       `Humidity: ${humidity}`,

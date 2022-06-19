@@ -15,12 +15,15 @@ export const Map = ({extractParamsData}) => {
     //componentDidMount
     const unsubscribeCenter = eventBus.on('clickLoc', ({lat, lng}) => {
       setCenter({lat, lng})
+      eventBus.emit('centerWeather', {lat, lng})
       locService.saveCenterLoc({lat, lng})
     })
 
     const unsubscribeSearch = eventBus.on('searchLoc', (loc) => {
       setCenter(loc)
       locService.saveCenterLoc(loc)
+      console.log('loc', loc)
+      eventBus.emit('centerWeather', loc)
       setMarkers((prevMarkers) => [...prevMarkers, loc])
     })
 
@@ -29,6 +32,7 @@ export const Map = ({extractParamsData}) => {
         ({coords: {latitude: lat, longitude: lng}}) => {
           const pos = {lat, lng}
           setCenter(pos)
+          eventBus.emit('centerWeather', pos)
           locService.saveCenterLoc(pos)
         }
       )

@@ -21,6 +21,8 @@ export const Modal = ({pos}) => {
     ev.preventDefault()
     await locService.saveLoc(loc)
     setShow(false)
+    //test change the weather to the marked place , maybe remove it later
+    eventBus.emit('centerWeather', loc)
     eventBus.emit('putMark', loc)
   }
 
