@@ -44,7 +44,7 @@ export const Map = ({extractParamsData}) => {
     // Get data from the qs params in the url - lat,lng,
     // Can do stuff with it like set the center of the map
     const centerLoc = extractParamsData()
-    centerLoc ? setCenter(centerLoc) : setCenter({lat: 34, lng: -80})
+    centerLoc.lat ? setCenter(centerLoc) : setCenter({lat: 34, lng: -80})
     locService.saveCenterLoc({lat: 34, lng: -80})
 
     //componentWillUnmount
