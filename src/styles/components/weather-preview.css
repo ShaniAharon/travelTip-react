@@ -16,14 +16,14 @@
 }
 
 .weather-preview h1{
- margin-top: 10px;
+ margin-top: 6px;
  font-size: 2em;
  font-family: sans-serif;
 
  color: var(--blue-300);
 }
 .weather-list{
-  margin-top: 10px;
+  margin-top: 12px;
   text-align: left;
 }
 
