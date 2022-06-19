@@ -19,8 +19,7 @@ export const MapApp = () => {
     const modfiyURL = window.location.href + `?lat=${lat}&lng=${lng}` //http://localhost:3000/?lat=3.14&lng=1.63
 
     //copy the page url to clipboard
-    const url = navigator.clipboard.writeText(modfiyURL)
-    console.log('url', url)
+    navigator.clipboard.writeText(modfiyURL)
   }
 
   const [search, setSearch] = useState('')
@@ -34,7 +33,6 @@ export const MapApp = () => {
     const {results} = await geoService.getPos(search)
     const searchPos = results[0].geometry.location
     const loc = {...searchPos, name: search}
-    console.log('loc seearch', loc) //results[0].geometry.location
     await locService.saveLoc(loc)
     eventBus.emit('searchLoc', loc)
     setSearch('')

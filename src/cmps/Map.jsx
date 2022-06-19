@@ -29,8 +29,6 @@ export const Map = () => {
           const pos = {lat, lng}
           setCenter(pos)
           locService.saveCenterLoc(pos)
-          const test = locService.getCenterLoc()
-          console.log('test', test)
         }
       )
     })
