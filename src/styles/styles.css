@@ -3,7 +3,6 @@
 @import './base/util.css';
 
 /** VIEWS **/
-@import './views/app.css';
 @import './views/map-app.css';
 
 /** COMPONENTS **/

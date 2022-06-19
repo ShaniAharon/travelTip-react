@@ -2,9 +2,8 @@ import {useEffect, useMemo, useRef, useState} from 'react'
 import {GoogleMap, Marker} from '@react-google-maps/api'
 import {Modal} from '../cmps/Modal'
 import {locService} from '../services/loc.service'
-import {weatherService} from '../services/weather.service'
 import {eventBus} from '../services/eventBusService'
-import mark from '../img/mark.png'
+import mark from '../assets/img/mark.png'
 
 export const Map = ({extractParamsData}) => {
   // let center = useMemo(() => ({lat: 34, lng: -80}), [])

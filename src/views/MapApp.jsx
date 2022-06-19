@@ -78,12 +78,23 @@ export const MapApp = () => {
         </button>
         {/* put it in a cmp later */}
         <div className="search-container">
-          <input type="text" onChange={searchLoc} value={search} className="" />
+          <input
+            placeholder="Enter Location"
+            type="text"
+            onChange={searchLoc}
+            value={search}
+            className=""
+          />
           <button onClick={findLoc} className="btn  btn-success btn-location">
             find Location
           </button>
         </div>
-        <button onClick={copyURLToClipboard}>Copy to clipboard</button>
+        <button
+          className=" btn-clip btn btn-warning"
+          onClick={copyURLToClipboard}
+        >
+          Copy to clipboard
+        </button>
         <WeatherPreview />
       </div>
     </section>
