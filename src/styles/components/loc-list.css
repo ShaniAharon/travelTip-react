@@ -18,8 +18,8 @@
   display: none;
 }
 
-.loc-list .btn-danger{
-  margin-right: 5px;
+.loc-list .btn-delete{
+  margin-left: 5px;
 }
 
 .loc:hover {

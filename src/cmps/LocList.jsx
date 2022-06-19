@@ -51,17 +51,17 @@ export const LocList = () => {
               onMouseLeave={(ev) => ev.stopPropagation()}
             >
               <button
+                onClick={() => handleClick(loc)}
+                className={'btn btn-success '}
+              >
+                Go
+              </button>
+              <button
                 onClick={(ev) => removeLoc(ev, loc)}
                 onMouseLeave={(ev) => ev.stopPropagation()}
                 className={'btn btn-danger btn-delete'}
               >
                 delete
-              </button>
-              <button
-                onClick={() => handleClick(loc)}
-                className={'btn btn-success btn-delete'}
-              >
-                Go
               </button>
             </div>
           </li>
