@@ -78,7 +78,7 @@ export const MapApp = () => {
         {/* put it in a cmp later */}
         <div className="search-container">
           <input
-            placeholder="Enter Location"
+            placeholder="Enter Your Destination"
             type="text"
             onChange={searchLoc}
             value={search}
