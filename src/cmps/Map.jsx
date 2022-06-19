@@ -4,6 +4,7 @@ import {Modal} from '../cmps/Modal'
 import {locService} from '../services/loc.service'
 import {weatherService} from '../services/weather.service'
 import {eventBus} from '../services/eventBusService'
+import mark from '../img/mark.png'
 
 export const Map = ({extractParamsData}) => {
   // let center = useMemo(() => ({lat: 34, lng: -80}), [])
@@ -87,7 +88,14 @@ export const Map = ({extractParamsData}) => {
       mapContainerClassName="map-container"
     >
       {markers.map(({name, lat, lng}, idx) => (
-        <Marker key={idx} title={name} position={{lat, lng}} />
+        <Marker
+          icon={{
+            url: mark,
+          }}
+          key={idx}
+          title={name}
+          position={{lat, lng}}
+        />
       ))}
       {pos && <Modal pos={pos} />}
     </GoogleMap>
