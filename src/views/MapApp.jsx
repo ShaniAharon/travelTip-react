@@ -12,6 +12,8 @@ export const MapApp = () => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   })
 
+  //TODO: make style responsive
+
   //Create a ‘copy link’ button that saves a link to the clipboard.
   //Use query string params
 
@@ -70,10 +72,7 @@ export const MapApp = () => {
       <Map extractParamsData={extractParamsData} />
       <div>
         <LocList />
-        <button
-          onClick={toMyLoc}
-          className="btn pos-center btn-primary btn-location"
-        >
+        <button onClick={toMyLoc} className="btn  btn-primary btn-location">
           My location
         </button>
         {/* put it in a cmp later */}
@@ -85,7 +84,7 @@ export const MapApp = () => {
             value={search}
             className=""
           />
-          <button onClick={findLoc} className="btn  btn-success btn-location">
+          <button onClick={findLoc} className="btn  btn-success">
             find Location
           </button>
         </div>
