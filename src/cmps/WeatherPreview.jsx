@@ -25,14 +25,15 @@ export const WeatherPreview = ({pos}) => {
   }, [pos])
 
   const prepareData = () => {
-    const {weather, main} = weatherData
+    const {weather, main, name} = weatherData
     const {temp, humidity} = main
     const {description} = weather[0]
     // const mains = Object.entries(main).map((item) => (
     //   <li key={Math.random()}>{item}</li>
     // ))
     return [
-      `Temp: ${temp} `,
+      `Place Name: ${name}`,
+      `Temp in celsius: ${temp} `,
       `Humidity: ${humidity}`,
       `Description: ${description}`,
     ]

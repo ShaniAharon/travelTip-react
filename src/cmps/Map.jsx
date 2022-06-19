@@ -22,7 +22,6 @@ export const Map = ({extractParamsData}) => {
     const unsubscribeSearch = eventBus.on('searchLoc', (loc) => {
       setCenter(loc)
       locService.saveCenterLoc(loc)
-      console.log('loc', loc)
       eventBus.emit('centerWeather', loc)
       setMarkers((prevMarkers) => [...prevMarkers, loc])
     })
@@ -49,8 +48,8 @@ export const Map = ({extractParamsData}) => {
     // Get data from the qs params in the url - lat,lng,
     // Can do stuff with it like set the center of the map
     const centerLoc = extractParamsData()
-
-    // weatherService.getWeather(centerLoc).then((res) => console.log(res))
+    //TODO: try to show the right temp when open link in loc
+    if (centerLoc.lat) eventBus.emit('centerWeather', centerLoc)
     centerLoc.lat ? setCenter(centerLoc) : setCenter({lat: 34, lng: -80})
     locService.saveCenterLoc({lat: 34, lng: -80})
 
