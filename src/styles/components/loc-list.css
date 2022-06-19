@@ -13,11 +13,13 @@
  color: var(--green-300);
  font-family: sans-serif;
 }
-/* .btn-delete{
+
+.loc-list .btn-container{
   display: none;
-} */
-.btn-container{
-  display: none;
+}
+
+.loc-list .btn-danger{
+  margin-right: 5px;
 }
 
 .loc:hover {

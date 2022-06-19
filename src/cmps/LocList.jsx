@@ -23,15 +23,9 @@ export const LocList = () => {
   const handleClick = (loc) => {
     eventBus.emit('clickLoc', loc)
   }
-  const handleButtonHover = (ev) => {
-    ev.stopPropagation()
-  }
-  const handleButtonLeave = (ev) => {
-    ev.stopPropagation()
-  }
 
   const handleMouseOver = (ev) => {
-    ev.target.children[0].style.display = 'block'
+    ev.target.children[0].style.display = 'flex'
   }
 
   const handleMouseLeave = (ev) => {
@@ -47,18 +41,18 @@ export const LocList = () => {
           <li
             onMouseOver={handleMouseOver}
             onMouseLeave={handleMouseLeave}
-            className="loc"
+            className="loc flex items-center"
             key={loc._id}
           >
             {loc.name}
             <div
-              className="btn-container"
-              onMouseOver={handleButtonHover}
-              onMouseLeave={handleButtonLeave}
+              className="btn-container m-1 "
+              onMouseOver={(ev) => ev.stopPropagation()}
+              onMouseLeave={(ev) => ev.stopPropagation()}
             >
               <button
                 onClick={(ev) => removeLoc(ev, loc)}
-                onMouseLeave={handleButtonLeave}
+                onMouseLeave={(ev) => ev.stopPropagation()}
                 className={'btn btn-danger btn-delete'}
               >
                 delete
