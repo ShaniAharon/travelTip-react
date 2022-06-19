@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useLoadScript} from '@react-google-maps/api'
 import {Map} from '../cmps/Map'
 import {LocList} from '../cmps/LocList'
@@ -11,13 +11,8 @@ export const MapApp = () => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   })
 
-  useEffect(() => {
-    const centerPos = extractParamsData()
-    console.log('centerPos', centerPos)
-  }, [])
-
-  //TODO: Create a ‘copy link’ button that saves a link to the clipboard.
-  //TODO: Use query string params
+  //Create a ‘copy link’ button that saves a link to the clipboard.
+  //Use query string params
 
   const copyURLToClipboard = () => {
     const {lat, lng} = locService.getCenterLoc()
@@ -30,8 +25,7 @@ export const MapApp = () => {
     //copy the page url to clipboard
     navigator.clipboard.writeText(modfiyURL)
   }
-  //TODO: Get data from the qs params in the url - lat,lng,
-  // Can do stuff with it like set the center of the map
+
   //Using Proxy() is more performant than using Object.fromEntries() and better supported
   // const params = new Proxy(new URLSearchParams(window.location.search), {
   //   get: (searchParams, prop) => searchParams.get(prop),
@@ -44,7 +38,7 @@ export const MapApp = () => {
       get: (searchParams, prop) => searchParams.get(prop),
     })
     const {lat, lng} = params
-    const centerPos = {lat, lng}
+    const centerPos = {lat: +lat, lng: +lng}
     return centerPos
   }
 
@@ -72,7 +66,7 @@ export const MapApp = () => {
   if (!isLoaded) return <div>Loading...</div>
   return (
     <section className="map-app-container">
-      <Map />
+      <Map extractParamsData={extractParamsData} />
       <div>
         <LocList />
         <button

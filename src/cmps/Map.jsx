@@ -4,7 +4,7 @@ import {Modal} from '../cmps/Modal'
 import {locService} from '../services/loc.service'
 import {eventBus} from '../services/eventBusService'
 
-export const Map = () => {
+export const Map = ({extractParamsData}) => {
   // let center = useMemo(() => ({lat: 34, lng: -80}), [])
   const [pos, setPos] = useState(null)
   const [center, setCenter] = useState(null)
@@ -38,12 +38,15 @@ export const Map = () => {
     })
 
     const unsubscribeRemoveMark = eventBus.on('removeMark', (locId) => {
-      //TODO: fix bug when you delete all the locs
+      //fix bug when you delete all the locs
       setMarkers((prevMarkers) => prevMarkers.filter(({_id}) => _id !== locId))
     })
-
-    setCenter({lat: 34, lng: -80})
+    // Get data from the qs params in the url - lat,lng,
+    // Can do stuff with it like set the center of the map
+    const centerLoc = extractParamsData()
+    centerLoc ? setCenter(centerLoc) : setCenter({lat: 34, lng: -80})
     locService.saveCenterLoc({lat: 34, lng: -80})
+
     //componentWillUnmount
     return () => {
       unsubscribeCenter()
