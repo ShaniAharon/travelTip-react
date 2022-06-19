@@ -20,6 +20,24 @@ export const MapApp = () => {
 
     //copy the page url to clipboard
     navigator.clipboard.writeText(modfiyURL)
+    extractParamsData()
+  }
+  //TODO: Get data from the qs params in the url - lat,lng,
+  // Can do stuff with it like set the center of the map
+  //Using Proxy() is more performant than using Object.fromEntries() and better supported
+  // const params = new Proxy(new URLSearchParams(window.location.search), {
+  //   get: (searchParams, prop) => searchParams.get(prop),
+  // });
+  // // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+  // let value = params.some_key; // "some_value"
+
+  const extractParamsData = () => {
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    })
+    const {lat, lng} = params
+    const centerPos = {lat, lng}
+    return centerPos
   }
 
   const [search, setSearch] = useState('')

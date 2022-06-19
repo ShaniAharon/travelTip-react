@@ -69,7 +69,6 @@ function setCenter(entityType, centerLoc) {
 }
 
 function getCenter(entityType) {
-    console.log('getItem(entityType)', JSON.parse(localStorage.getItem(entityType)));
     return JSON.parse(localStorage.getItem(entityType)) || null
 }
 
