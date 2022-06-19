@@ -2,6 +2,7 @@ import {useEffect, useMemo, useRef, useState} from 'react'
 import {GoogleMap, Marker} from '@react-google-maps/api'
 import {Modal} from '../cmps/Modal'
 import {locService} from '../services/loc.service'
+import {weatherService} from '../services/weather.service'
 import {eventBus} from '../services/eventBusService'
 
 export const Map = ({extractParamsData}) => {
@@ -44,6 +45,8 @@ export const Map = ({extractParamsData}) => {
     // Get data from the qs params in the url - lat,lng,
     // Can do stuff with it like set the center of the map
     const centerLoc = extractParamsData()
+
+    weatherService.getWeather(centerLoc).then((res) => console.log(res))
     centerLoc.lat ? setCenter(centerLoc) : setCenter({lat: 34, lng: -80})
     locService.saveCenterLoc({lat: 34, lng: -80})
 
