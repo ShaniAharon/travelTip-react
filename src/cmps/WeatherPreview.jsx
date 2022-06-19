@@ -41,10 +41,10 @@ export const WeatherPreview = ({pos}) => {
 
   if (!weatherData) return <div>Loading...</div>
   return (
-    <section className="weather-preview">
-      <h1>Weather</h1>
+    <section className="weather-preview pos-relative">
+      <h1 className="u">Weather</h1>
       {/* <pre>{JSON.stringify([weather, main], 0, 4)}</pre> */}
-      <ul className="clean-list">
+      <ul className="clean-list weather-list pos-center">
         {prepareData().map((item) => (
           <li key={Math.random()}>{item}</li>
         ))}

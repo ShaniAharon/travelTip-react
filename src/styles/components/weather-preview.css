@@ -5,6 +5,7 @@
   height: 200px;
   margin-left: 20px;
   transition: var(--transition);
+  text-align: center;
 }
 
 /* .btn-delete{
@@ -12,6 +13,22 @@
 } */
 .btn-container{
   display: none;
+}
+
+.weather-preview h1{
+ margin-top: 10px;
+ font-size: 2em;
+ font-family: sans-serif;
+
+ color: var(--blue-300);
+}
+.weather-list{
+  margin-top: 10px;
+  text-align: left;
+}
+
+.weather-list li{
+  margin-bottom: 5px;
 }
 
 .loc:hover {

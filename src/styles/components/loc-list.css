@@ -7,6 +7,12 @@
   transition: var(--transition);
 }
 
+.loc-list h2{
+  margin-top: 10px;
+ font-size: 2em;
+ color: var(--green-300);
+ font-family: sans-serif;
+}
 /* .btn-delete{
   display: none;
 } */
