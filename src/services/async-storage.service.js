@@ -5,7 +5,9 @@ export const storageService = {
     post,
     put,
     remove,
-    postMany
+    postMany,
+    setCenter,
+    getCenter
 }
 
 function query(entityType, delay = 300) {
@@ -61,6 +63,15 @@ function remove(entityType, entityId) {
         })
 }
 
+//map center function
+function setCenter(entityType, centerLoc) {
+    localStorage.setItem(entityType, JSON.stringify(centerLoc))
+}
+
+function getCenter(entityType) {
+    console.log('getItem(entityType)', JSON.parse(localStorage.getItem(entityType)));
+    return JSON.parse(localStorage.getItem(entityType)) || null
+}
 
 function _save(entityType, entities) {
     localStorage.setItem(entityType, JSON.stringify(entities))

@@ -13,6 +13,16 @@ export const MapApp = () => {
 
   //TODO: Create a ‘copy link’ button that saves a link to the clipboard.
   //TODO: Use query string params
+
+  const copyURLToClipboard = () => {
+    const {lat, lng} = locService.getCenterLoc()
+    const modfiyURL = window.location.href + `?lat=${lat}&lng=${lng}` //http://localhost:3000/?lat=3.14&lng=1.63
+
+    //copy the page url to clipboard
+    const url = navigator.clipboard.writeText(modfiyURL)
+    console.log('url', url)
+  }
+
   const [search, setSearch] = useState('')
 
   const searchLoc = ({target}) => {
@@ -31,6 +41,7 @@ export const MapApp = () => {
   }
 
   const toMyLoc = () => {
+    copyURLToClipboard()
     eventBus.emit('toUserLoc', 'test')
   }
 
@@ -53,6 +64,7 @@ export const MapApp = () => {
             find Location
           </button>
         </div>
+        <button onClick={copyURLToClipboard}>Copy to clipboard</button>
       </div>
     </section>
   )

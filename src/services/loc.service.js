@@ -2,13 +2,16 @@
 import { storageService } from "./async-storage.service";
 
 const STORAGE_KEY = 'locs'
+const STORAGE_CENTER_KEY = 'center'
 
 export const locService = {
     getLocs,
     getEmptyLoc,
     createLoc,
     saveLoc,
-    removeLoc
+    removeLoc,
+    saveCenterLoc,
+    getCenterLoc
 }
 
 const locs = [
@@ -23,6 +26,13 @@ async function removeLoc(locId) {
     return storageService.remove(STORAGE_KEY, locId)
 }
 
+function saveCenterLoc(centerLoc) {
+    storageService.setCenter(STORAGE_CENTER_KEY, centerLoc)
+}
+
+function getCenterLoc() {
+    return storageService.getCenter(STORAGE_CENTER_KEY)
+}
 
 
 function getEmptyLoc() {
