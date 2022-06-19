@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useLoadScript} from '@react-google-maps/api'
 import {Map} from '../cmps/Map'
+import {WeatherPreview} from '../cmps/WeatherPreview'
 import {LocList} from '../cmps/LocList'
 import {eventBus} from '../services/eventBusService'
 import {geoService} from '../services/geocoding.service'
@@ -83,6 +84,7 @@ export const MapApp = () => {
           </button>
         </div>
         <button onClick={copyURLToClipboard}>Copy to clipboard</button>
+        <WeatherPreview />
       </div>
     </section>
   )

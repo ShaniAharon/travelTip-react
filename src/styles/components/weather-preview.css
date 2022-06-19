@@ -1,0 +1,22 @@
+.weather-preview {
+  border: 2px solid var(--gray-300);
+  border-radius: 0.5rem;
+  width: 400px;
+  height: 200px;
+  margin-left: 20px;
+  transition: var(--transition);
+}
+
+/* .btn-delete{
+  display: none;
+} */
+.btn-container{
+  display: none;
+}
+
+.loc:hover {
+  border-color: var(--gray-500);
+  color: var(--green-300);
+  cursor: pointer;
+  transition: var(--transition);
+}

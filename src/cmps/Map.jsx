@@ -46,7 +46,7 @@ export const Map = ({extractParamsData}) => {
     // Can do stuff with it like set the center of the map
     const centerLoc = extractParamsData()
 
-    weatherService.getWeather(centerLoc).then((res) => console.log(res))
+    // weatherService.getWeather(centerLoc).then((res) => console.log(res))
     centerLoc.lat ? setCenter(centerLoc) : setCenter({lat: 34, lng: -80})
     locService.saveCenterLoc({lat: 34, lng: -80})
 
