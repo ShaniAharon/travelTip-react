@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import {useForm} from '../hooks/useForm'
 import {locService} from '../services/loc.service'
 import {eventBus} from '../services/eventBusService'
 import {weatherService} from '../services/weather.service'
@@ -28,9 +27,7 @@ export const WeatherPreview = ({pos}) => {
     const {weather, main, name} = weatherData
     const {temp, humidity} = main
     const {description} = weather[0]
-    // const mains = Object.entries(main).map((item) => (
-    //   <li key={Math.random()}>{item}</li>
-    // ))
+
     return [
       `Place Name: ${name}`,
       `Temp in celsius: ${temp} `,
